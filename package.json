@@ -25,13 +25,16 @@
       "last 1 safari version"
     ]
   },
+  
   "scripts": {
     "start": "PORT=3001 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "cy:open": "yarn start --silent & cypress open"
+    "cy:open": "yarn start --silent & cypress open",
+    "cy:run": "BROWSER=none yarn start & cypress run"
   },
+
   "devDependencies": {
     "cypress": "^4.1.0",
     "enzyme": "^3.11.0",
