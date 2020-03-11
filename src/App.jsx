@@ -1,33 +1,40 @@
 import React, { Component } from "react";
+import axios from "axios";
 
 class App extends Component {
+  state = {
+    query: ""
+  };
 
-  state={
-    query: ''
-  }
-
-  onChangeHandler = e => {
-    const input = e.target.value
-    this.setState({ [e.target.name]: input });
-  }
-
-  onSubmitHandler = e => {
+  onSubmitHandler = async e => {
     e.preventDefault();
-    //this.props.fetchSearchedTracks(this.state.query)
-  }
+    let response = await axios.get("http://localhost:3000/api/v1/tracks", {
+      params: {
+        q: e.target.elements.query.value
+      }
+    });
+
+    if (response.status == 200) {
+      this.setState({
+        tracks: response.data.tracks
+      })
+    } else {
+      debugger
+    }
+  };
 
   render() {
     return (
-      <form
-        onSubmitHandler={this.onSubmitHandler}
-      >
+      <form onSubmit={this.onSubmitHandler}>
         <input
-        id="tracks"
-        type="text"
-        name="query"
-        value={this.state.query}
-        onChangeHandler={this.onChangeHandler}/>
-        <button id="search"> Search</button>
+          id="search-field"
+          name="query"
+          onChangeHandler={this.onChangeHandler}
+        />
+        <button type="submit" id="search">
+          {" "}
+          Search
+        </button>
       </form>
     );
   }
