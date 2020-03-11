@@ -3,7 +3,8 @@ import axios from "axios";
 
 class App extends Component {
   state = {
-    query: ""
+    query: "",
+    song_not_found: {}
   };
 
   onSubmitHandler = async e => {
@@ -14,28 +15,40 @@ class App extends Component {
       }
     });
 
-    if (response.status == 200) {
+    if (response.status === 200) {
       this.setState({
         tracks: response.data.tracks
       })
     } else {
       debugger
+      this.setState({
+        song_not_found: "There is no matches for the song you are trying to search"
+      })
     }
   };
 
   render() {
     return (
+
+      <>
       <form onSubmit={this.onSubmitHandler}>
         <input
           id="search-field"
           name="query"
           onChangeHandler={this.onChangeHandler}
         />
+        
         <button type="submit" id="search">
           {" "}
           Search
         </button>
       </form>
+      <div>
+
+      <p>There is no matches for the song you are trying to search =D. </p>
+
+      </div>
+      </>
     );
   }
 }
