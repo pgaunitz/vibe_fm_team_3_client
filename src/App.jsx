@@ -19,8 +19,10 @@ class App extends Component {
       this.setState({
         tracks: response.data.tracks
       });
+      
+    } 
 
-    } else {
+    else {
       this.setState({
         song_not_found: "There are no matches for the song you are trying to search"
       })
@@ -42,15 +44,16 @@ class App extends Component {
           name="query"
           onChangeHandler={this.onChangeHandler}
           {this.state.response.data.tracks.map(track => {
-            if (response.data.tracks == ''){
               return (
-
-                spotify_id = {track.spotify_id}
-                name = {track.name}
-                artist = {track.artist}
+                <div
+                spotify_id = {tracks.spotify_id}
+                name = {tracks.name}
+                artist = {tracks.artist}
+                >
+                </div>
               )
             }
-          })}
+    )}
         />
         
         <button type="submit" id="search">
