@@ -18,16 +18,21 @@ class App extends Component {
     if (response.status === 200) {
       this.setState({
         tracks: response.data.tracks
-      })
+      });
+
     } else {
-      debugger
       this.setState({
-        song_not_found: "There is no matches for the song you are trying to search"
+        song_not_found: "There are no matches for the song you are trying to search"
       })
     }
   };
 
   render() {
+
+    if (
+      Array.isArray(this.state.response.data.tracks) &&
+      this.state.response.data.tracks.length
+    )
     return (
 
       <>
@@ -36,6 +41,16 @@ class App extends Component {
           id="search-field"
           name="query"
           onChangeHandler={this.onChangeHandler}
+          {this.state.response.data.tracks.map(track => {
+            if (response.data.tracks == ''){
+              return (
+
+                spotify_id = {track.spotify_id}
+                name = {track.name}
+                artist = {track.artist}
+              )
+            }
+          })}
         />
         
         <button type="submit" id="search">
