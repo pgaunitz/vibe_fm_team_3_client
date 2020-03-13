@@ -10,13 +10,11 @@ describe("user can search for song", () => {
       cy.visit("/");
     });
   
-    xit("retrieves song from API", () => {
+    it("retrieves song from API", () => {
       cy.get("input#search-field").type('Vertigo');
       cy.get("button#search").click();
-      cy.get("#tracks").should(
-        "contain",
-        "Vertigo"
-      );
+      cy.get("#songName").should("contain", "Vertigo");
+      cy.get("#artistName").should("contain", "U2");
     });
   })
 
@@ -37,7 +35,7 @@ describe("user can search for song", () => {
       it("User invalid search", () => {
           cy.get("input#search-field").type('asdasdasdasd');
           cy.get("button#search").click();
-         cy.get('#error_message').should('contain', 'no matches for the song')
+         cy.get('#errorMessage').should('contain', 'no matches for the song')
       });
     });
 })

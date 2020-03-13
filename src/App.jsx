@@ -29,13 +29,13 @@ class App extends Component {
     let results
     let message
     if (this.state.errorMessage) {
-      message = <p>{this.state.errorMessage}</p>
+      message = <p id="errorMessage">{this.state.errorMessage}</p>
     }
     if (this.state.tracks) {
       results = this.state.tracks.map(track => {
         return (
           <div id={'track-' + track.spotify_id} key={track.spotify_id}>
-          <p>{track.name}{track.artist}</p>
+          <p id="songName">{track.name}</p> <p id="artistName">{track.artist}</p>
           </div>
         );
       });
