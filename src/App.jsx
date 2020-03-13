@@ -3,8 +3,7 @@ import axios from "axios";
 
 class App extends Component {
   state = {
-    query: "",
-    error_message: {}
+    query: ""
   };
 
   onSubmitHandler = async e => {
@@ -14,50 +13,45 @@ class App extends Component {
         params: {
           q: e.target.elements.query.value
         }
-      });  
+      });
       this.setState({
         tracks: response.data.tracks
       });
-    } catch(error) {
-      this.setState({ 
-       errorMessage: error.response.data.error_message
+    } catch (error) {
+      this.setState({
+        errorMessage: error.response.data.error_message
       });
     }
   };
 
   render() {
-    let results
-    let message
+    let results;
+    let message;
     if (this.state.errorMessage) {
-      message = <p id="errorMessage">{this.state.errorMessage}</p>
+      message = <p id="errorMessage">{this.state.errorMessage}</p>;
     }
     if (this.state.tracks) {
       results = this.state.tracks.map(track => {
         return (
-          <div id={'track-' + track.spotify_id} key={track.spotify_id}>
-          <p id="songName">{track.name}</p> <p id="artistName">{track.artist}</p>
+          <div id={"track-" + track.spotify_id} key={track.spotify_id}>
+            <p id="songName">{track.name}</p>{" "}
+            <p id="artistName">{track.artist}</p>
           </div>
         );
       });
     }
     return (
-
       <>
-      <form onSubmit={this.onSubmitHandler}>
-        <input
-          id="search-field"
-          name="query"
-        />
-        <button type="submit" id="search">
-          {" "}
-          Search
-        </button>
-      </form>
-
-      <div>
-      {results}
-      {message}
-      </div>
+        <form onSubmit={this.onSubmitHandler}>
+          <input id="search-field" name="query" />
+          <button type="submit" id="search">
+            Search
+          </button>
+        </form>
+        <div>
+          {results}
+          {message}
+        </div>
       </>
     );
   }
