@@ -3,7 +3,8 @@ import axios from "axios";
 
 class App extends Component {
   state = {
-    query: ""
+    query: "",
+    query2: ""
   };
 
   onSubmitHandler = async e => {
@@ -26,6 +27,7 @@ class App extends Component {
 
   render() {
     let results;
+    let results2;
     let message;
     if (this.state.errorMessage) {
       message = <p id="errorMessage">{this.state.errorMessage}</p>;
@@ -40,16 +42,36 @@ class App extends Component {
         );
       });
     }
+    if (this.state.artists) {
+      debugger
+      results2 = this.state.artists.map(artist => {
+        return (
+          <div id={"artist-" + artist.name} key={artist.name}>
+            {" "}
+            <p id="artistName">{artist.name}</p>
+          </div>
+        );
+      });
+    }
     return (
       <>
         <form onSubmit={this.onSubmitHandler}>
           <input id="search-field" name="query" />
           <button type="submit" id="search">
-            Search
+            Search Track
           </button>
         </form>
+
+        <form onSubmit={this.onSubmitHandler}>
+          <input id="search-field2" name="query2" />
+          <button type="submit" id="search2">
+            Search Artist
+          </button>
+        </form>
+
         <div>
           {results}
+          {results2}
           {message}
         </div>
       </>
