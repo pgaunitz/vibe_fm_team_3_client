@@ -4,37 +4,42 @@ import axios from "axios";
 class App extends Component {
   state = {
     query: "",
-    song_not_found: {}
+    error_message: {}
   };
 
   onSubmitHandler = async e => {
-    e.preventDefault();
-    let response = await axios.get("http://localhost:3000/api/v1/tracks", {
-      params: {
-        q: e.target.elements.query.value
-      }
-    });
-
-    if (response.status === 200) {
+    try {
+      e.preventDefault();
+      let response = await axios.get("http://localhost:3000/api/v1/tracks", {
+        params: {
+          q: e.target.elements.query.value
+        }
+      });  
       this.setState({
         tracks: response.data.tracks
       });
-      
-    } 
-
-    else {
-      this.setState({
-        song_not_found: "There are no matches for the song you are trying to search"
-      })
+    } catch(error) {
+      this.setState({ 
+       errorMessage: error.response.data.error_message
+      });
     }
   };
 
   render() {
-
-    if (
-      Array.isArray(this.state.response.data.tracks) &&
-      this.state.response.data.tracks.length
-    )
+    let results
+    let message
+    if (this.state.errorMessage) {
+      message = <p>{this.state.errorMessage}</p>
+    }
+    if (this.state.tracks) {
+      results = this.state.tracks.map(track => {
+        return (
+          <div id={'track-' + track.spotify_id} key={track.spotify_id}>
+          <p>{track.name}{track.artist}</p>
+          </div>
+        );
+      });
+    }
     return (
 
       <>
@@ -42,29 +47,16 @@ class App extends Component {
         <input
           id="search-field"
           name="query"
-          onChangeHandler={this.onChangeHandler}
-          {this.state.response.data.tracks.map(track => {
-              return (
-                <div
-                spotify_id = {tracks.spotify_id}
-                name = {tracks.name}
-                artist = {tracks.artist}
-                >
-                </div>
-              )
-            }
-    )}
         />
-        
         <button type="submit" id="search">
           {" "}
           Search
         </button>
       </form>
+
       <div>
-
-      <p>There is no matches for the song you are trying to search =D. </p>
-
+      {results}
+      {message}
       </div>
       </>
     );
