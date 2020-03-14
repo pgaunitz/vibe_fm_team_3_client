@@ -31,17 +31,20 @@ import axios from "axios";
       message = <p id="errorMessage">{this.state.errorMessage}</p>;
     }
     if (this.state.artists) {
+      
       results = this.state.artists.map(artist => {
         return (
+          <>
           <div id={"artist-" + artist.name} key={artist.name}>
-            <p id="artistName"> {artist.name}</p>
+            <div id="artistName"> {artist.name}</div>
             <p id="genre"> {artist.genre}</p> {" "}            
             <p id="songName">{artist.song_name}</p>{" "}
           </div>
+          </>
         );
-        
       });
     }
+    
 
     return (
       <>
@@ -51,7 +54,7 @@ import axios from "axios";
             Search Artist
           </button>
         </form>
-        <div>
+        <div id="output">
           {results}
           {message}
         </div>
