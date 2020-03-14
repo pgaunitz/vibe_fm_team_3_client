@@ -23,7 +23,7 @@ class UserCanSearchSong extends Component {
       });
     }
   };
-  
+
   render() {
     let results;
     let message;
