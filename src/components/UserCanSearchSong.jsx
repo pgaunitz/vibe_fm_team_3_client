@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import axios from "axios";
+
 class UserCanSearchSong extends Component {
   state = {
     query: ""
   };
+
   onSubmitHandler = async e => {
     try {
       e.preventDefault();
@@ -21,6 +23,7 @@ class UserCanSearchSong extends Component {
       });
     }
   };
+  
   render() {
     let results;
     let message;
