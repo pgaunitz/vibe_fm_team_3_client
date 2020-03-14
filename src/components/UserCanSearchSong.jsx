@@ -23,7 +23,7 @@ class UserCanSearchSong extends Component {
       });
     }
   };
-  
+
   render() {
     let results;
     let message;
@@ -44,8 +44,8 @@ class UserCanSearchSong extends Component {
     return (
       <>
         <form onSubmit={this.onSubmitHandler}>
-          <input id="search-field" name="query" />
-          <button type="submit" id="search">
+          <input id="search-field1" name="query" />
+          <button type="submit" id="search-track">
             Search Track
           </button>
         </form>

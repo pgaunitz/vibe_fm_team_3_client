@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 
- class UserCanSearchArtist extends Component {
+class UserCanSearchArtist extends Component {
   state = {
     query: ""
   };
@@ -15,7 +15,7 @@ import axios from "axios";
         }
       });
       this.setState({
-        artists: response.data.artists,
+        artists: response.data.artists
       });
     } catch (error) {
       this.setState({
@@ -23,25 +23,25 @@ import axios from "axios";
       });
     }
   };
-  
+
   render() {
     let results;
-    let message; 
+    let message;
     if (this.state.errorMessage) {
       message = <p id="errorMessage">{this.state.errorMessage}</p>;
     }
     if (this.state.artists) {
       results = this.state.artists.map(artist => {
         return (
-          <div id={"artist-" + artist.name} key={artist.name}>
-            <p id="artistName"> {artist.name}</p>
-            <p id="genre"> {artist.genre}</p> {" "}            
-            <p id="songName">{artist.song_name}</p>{" "}
-          </div>
+          <>
+            <div id={"artist-" + artist.name} key={artist.name}>
+              <div id="artistName"> {artist.name}</div>
+              <p id="genre"> {artist.genre}</p>{" "}
+              <p id="songName">{artist.song_name}</p>{" "}
+            </div>
+          </>
         );
-        
       });
-      debugger
     }
 
     return (
@@ -52,7 +52,7 @@ import axios from "axios";
             Search Artist
           </button>
         </form>
-        <div>
+        <div id="output">
           {results}
           {message}
         </div>
