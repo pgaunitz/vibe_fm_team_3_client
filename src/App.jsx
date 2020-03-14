@@ -1,79 +1,24 @@
 import React, { Component } from "react";
-import axios from "axios";
+import UserCanSearchSong from "./components/UserCanSearchSong";
+import UserCanSearchArtist from "./components/UserCanSearchArtist";
 
 class App extends Component {
   state = {
-    query: "",
-    query2: ""
-  };
-
-  onSubmitHandler = async e => {
-    try {
-      e.preventDefault();
-      let response = await axios.get("http://localhost:3000/api/v1/tracks", {
-        params: {
-          q: e.target.elements.query.value
-        }
-      });
-      this.setState({
-        tracks: response.data.tracks
-      });
-    } catch (error) {
-      this.setState({
-        errorMessage: error.response.data.error_message
-      });
-    }
+    tracks: "",
+    artists: ""
+  }
+  onChangeHandler = e => {
+    this.setState( { [e.track.name]: e.track.name });
   };
 
   render() {
-    let results;
-    let results2;
-    let message;
-    if (this.state.errorMessage) {
-      message = <p id="errorMessage">{this.state.errorMessage}</p>;
-    }
-    if (this.state.tracks) {
-      results = this.state.tracks.map(track => {
-        return (
-          <div id={"track-" + track.spotify_id} key={track.spotify_id}>
-            <p id="songName">{track.name}</p>{" "}
-            <p id="artistName">{track.artist}</p>
-          </div>
-        );
-      });
-    }
-    if (this.state.artists) {
-      debugger
-      results2 = this.state.artists.map(artist => {
-        return (
-          <div id={"artist-" + artist.name} key={artist.name}>
-            {" "}
-            <p id="artistName">{artist.name}</p>
-          </div>
-        );
-      });
-    }
     return (
       <>
-        <form onSubmit={this.onSubmitHandler}>
-          <input id="search-field" name="query" />
-          <button type="submit" id="search">
-            Search Track
-          </button>
-        </form>
+        <label> Search by track</label>
+       {<UserCanSearchSong />}
 
-        <form onSubmit={this.onSubmitHandler}>
-          <input id="search-field2" name="query2" />
-          <button type="submit" id="search2">
-            Search Artist
-          </button>
-        </form>
-
-        <div>
-          {results}
-          {results2}
-          {message}
-        </div>
+        <label> Search by artists</label>
+        {<UserCanSearchArtist />}
       </>
     );
   }
