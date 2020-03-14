@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
  class UserCanSearchArtist extends Component {
   state = {
-    query2: ""
+    query: ""
   };
   onSubmitHandler = async e => {
     try {
@@ -13,7 +13,8 @@ import axios from "axios";
         }
       });
       this.setState({
-        artists: response.data.artists
+        artists: response.data.artists,
+        song: response.data.song
       });
     } catch (error) {
       this.setState({
@@ -30,9 +31,10 @@ import axios from "axios";
     if (this.state.artists) {
       results = this.state.artists.map(artist => {
         return (
-          <div id={"artist-" + artist.spotify_id} key={artist.spotify_id}>
-            <p id="artistName">{artist.name}</p>{" "}
-            <p id="songName">{artist.track}</p>
+          <div id={"artist-" + artist.name} key={artist.name}>
+            <p id="artistName">{artist.name}</p>
+            <p id="genre">{artist.genre}</p>{" "}
+            <p id="songName">{artist.song.name}</p>{" "}
           </div>
         );
       });
@@ -41,9 +43,9 @@ import axios from "axios";
     return (
       <>
         <form onSubmit={this.onSubmitHandler}>
-          <input id="search-field" name="query2" />
+          <input id="search-field" name="query" />
           <button type="submit" id="search">
-            Search Track
+            Search Artist
           </button>
         </form>
         <div>

@@ -10,8 +10,8 @@ describe("user can search for artist", () => {
     });
   
     it("retrieves artist from API", () => {
-      cy.get("input#search-field2").type('U2');
-      cy.get("button#search2").click();
+      cy.get("input#search-field").type('U2');
+      cy.get("button#search").click();
       cy.get("#artist").should(
         "contain",
         "U2"
