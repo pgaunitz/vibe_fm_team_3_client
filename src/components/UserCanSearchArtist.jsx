@@ -41,7 +41,6 @@ import axios from "axios";
         );
         
       });
-      debugger
     }
 
     return (
