@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
+import axios from "axios";
 import { FacebookProvider, LoginButton } from 'react-facebook';
 
 
 class FacebookLogin extends Component {
 
 
-    handleResponse = data => {
-        const response = await.axios.post("http://localhost:3000/api/v1/auth", {
+    handleResponse = async data => {
+        const response = await axios.post("http://localhost:3000/api/v1/auth", {
             uid: data.profile.id,
             email: data.profile.email,
             provider: "facebook"
