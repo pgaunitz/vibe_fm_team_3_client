@@ -1,68 +1,30 @@
 import React, { Component } from "react";
-import axios from "axios";
+import UserCanSearchSong from "./components/UserCanSearchSong";
+import UserCanSearchArtist from "./components/UserCanSearchArtist";
+import FacebookLogin from "./components/FacebookLogin";
 
 class App extends Component {
   state = {
-    query: "",
-    song_not_found: {}
-  };
+    tracks: "",
+    artists: ""
+  }
 
-  onSubmitHandler = async e => {
-    e.preventDefault();
-    let response = await axios.get("http://localhost:3000/api/v1/tracks", {
-      params: {
-        q: e.target.elements.query.value
-      }
-    });
-
-    if (response.status === 200) {
-      this.setState({
-        tracks: response.data.tracks
-      });
-
-    } else {
-      this.setState({
-        song_not_found: "There are no matches for the song you are trying to search"
-      })
-    }
+  onChangeHandler = e => {
+    this.setState({ [e.track.name]: e.track.name });
   };
 
   render() {
-
-    if (
-      Array.isArray(this.state.response.data.tracks) &&
-      this.state.response.data.tracks.length
-    )
     return (
-
       <>
-      <form onSubmit={this.onSubmitHandler}>
-        <input
-          id="search-field"
-          name="query"
-          onChangeHandler={this.onChangeHandler}
-          {this.state.response.data.tracks.map(track => {
-            if (response.data.tracks == ''){
-              return (
+        <div>
+          <FacebookLogin />
+        </div>
 
-                spotify_id = {track.spotify_id}
-                name = {track.name}
-                artist = {track.artist}
-              )
-            }
-          })}
-        />
-        
-        <button type="submit" id="search">
-          {" "}
-          Search
-        </button>
-      </form>
-      <div>
+        <label> Search by track</label>
+        {<UserCanSearchSong />}
 
-      <p>There is no matches for the song you are trying to search =D. </p>
-
-      </div>
+        <label> Search by artists</label>
+        {<UserCanSearchArtist />}
       </>
     );
   }
