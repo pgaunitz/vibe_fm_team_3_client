@@ -3,6 +3,7 @@ import UserCanSearchSong from "./components/UserCanSearchSong";
 import UserCanSearchArtist from "./components/UserCanSearchArtist";
 import FacebookLogin from "./components/FacebookLogin";
 import LoginForm from "./Components/LoginForm";
+import { authenticate } from './Modules/auth'
 
 class App extends Component {
   state = {
@@ -39,7 +40,7 @@ class App extends Component {
           Login
         </button>
       );
-      
+
     return (
       <>
         <div>
