@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import UserCanSearchSong from "./components/UserCanSearchSong";
 import UserCanSearchArtist from "./components/UserCanSearchArtist";
 import FacebookLogin from "./components/FacebookLogin";
-import LoginForm from "./Components/LoginForm";
-import { authenticate } from './Modules/auth'
+import LoginForm from "./components/LoginWithAuth";
+import { authenticate } from './modules/authentication'
 
 class App extends Component {
   state = {
@@ -30,21 +30,35 @@ class App extends Component {
   };
 
   render() {
-    const renderLogin = this.state.renderLoginForm ? (
-      <LoginForm submitFormHandler={this.onLogin} />
-    ) : (
-        <button
-          id="login"
-          onClick={() => this.setState({ renderLoginForm: true })}
-        >
-          Login
-        </button>
-      );
+    const { renderLoginForm, authenticated, message } = this.state;
+    let renderLogin;
+    switch(true) {
+      case renderLoginForm && !authenticated:
+        renderLogin = <LoginForm submitFormHandler={this.onLogin} />;
+        break;
+      case !renderLoginForm && !authenticated:
+        renderLogin = (
+          <>
+            <button
+              id="login"
+              onClick={() => this.setState({ renderLoginForm: true })}
+            >
+              Login
+            </button>
+            <p>{message}</p>
+          </>
+        );
+        break;
+      case authenticated:
+        renderLogin = (
+          <p>Hi {JSON.parse(sessionStorage.getItem("credentials")).uid}</p>
+        );
+        break;
+    }
 
     return (
       <>
         <div>
-          <InputFields onChangeHandler={this.onChangeHandler} />
           {renderLogin}
         </div>
 
@@ -52,11 +66,8 @@ class App extends Component {
           <FacebookLogin />
         </div>
 
-        <label> Search by track</label>
-        {<UserCanSearchSong />}
-
-        <label> Search by artists</label>
-        {<UserCanSearchArtist />}
+        {this.state.authenticated === true && <UserCanSearchSong />}
+        {this.state.authenticated === true && <UserCanSearchArtist />}
       </>
     );
   }

@@ -46,6 +46,9 @@ class UserCanSearchArtist extends Component {
 
     return (
       <>
+        <div>
+          <h2>Search for Artist</h2>
+        </div>
         <form onSubmit={this.onSubmitHandler}>
           <input id="search-field" name="query" />
           <button type="submit" id="search">

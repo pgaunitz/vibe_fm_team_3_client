@@ -18,7 +18,6 @@ class FacebookLogin extends Component {
         } else {
             debugger;
         }
-
     }
 
     render() {
