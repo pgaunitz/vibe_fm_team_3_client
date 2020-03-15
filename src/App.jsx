@@ -9,10 +9,22 @@ class App extends Component {
     artists: ""
   }
 
-
   handleResponse = data => {
-    debugger;
+    const response = await.axios.post("http://localhost:3000/api/v1/auth", {
+      uid: data.profile.id,
+      email: data.profile.email,
+      provider: "facebook"
+    });
+
+    if (response.status == 200) {
+      debugger;
+    } else {
+      debugger;
+    }
+
   } 
+
+  
 
   onChangeHandler = e => {
     this.setState( { [e.track.name]: e.track.name });
