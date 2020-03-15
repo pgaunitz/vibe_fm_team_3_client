@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import UserCanSearchSong from "./components/UserCanSearchSong";
 import UserCanSearchArtist from "./components/UserCanSearchArtist";
-import { FacebookProvider, LoginButton } from 'react-facebook';
+import FacebookLogin from "./components/FacebookLogin";
 
 class App extends Component {
   state = {
@@ -9,45 +9,19 @@ class App extends Component {
     artists: ""
   }
 
-  handleResponse = data => {
-    const response = await.axios.post("http://localhost:3000/api/v1/auth", {
-      uid: data.profile.id,
-      email: data.profile.email,
-      provider: "facebook"
-    });
-
-    if (response.status == 200) {
-      debugger;
-    } else {
-      debugger;
-    }
-
-  } 
-
-  
-
   onChangeHandler = e => {
-    this.setState( { [e.track.name]: e.track.name });
+    this.setState({ [e.track.name]: e.track.name });
   };
-
-
 
   render() {
     return (
       <>
-      <div>
-      <FacebookProvider appId="869256990162492">
-        <LoginButton
-          scope="email"
-          onCompleted={this.handleResponse}
-        >
-          <span>Login via Facebook</span>
-        </LoginButton>
-      </FacebookProvider>
-      </div>
+        <div>
+          <FacebookLogin />
+        </div>
 
         <label> Search by track</label>
-       {<UserCanSearchSong />}
+        {<UserCanSearchSong />}
 
         <label> Search by artists</label>
         {<UserCanSearchArtist />}
