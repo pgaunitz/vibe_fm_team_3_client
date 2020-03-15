@@ -9,9 +9,15 @@ class App extends Component {
     artists: ""
   }
 
+  checkLoginStatus() {
+    Axios.get("")
+  }
+
   onChangeHandler = e => {
     this.setState({ [e.track.name]: e.track.name });
   };
+
+
 
   render() {
     return (

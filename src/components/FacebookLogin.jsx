@@ -13,7 +13,7 @@ class FacebookLogin extends Component {
             provider: "facebook"
         });
 
-        if (response.status == 200) {
+        if (response.status === 200) {
             debugger;
         } else {
             debugger;
@@ -24,7 +24,7 @@ class FacebookLogin extends Component {
     render() {
         return (
             <div>
-                <FacebookProvider appId="869256990162492">
+                <FacebookProvider appId="931150830637424">
                     <LoginButton
                         scope="email"
                         onCompleted={this.handleResponse}
