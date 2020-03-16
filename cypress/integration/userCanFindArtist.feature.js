@@ -20,8 +20,6 @@ describe("user can search for artist", () => {
   describe("SAD PATH user can search for artist top tracks", () => {
     beforeEach(() => {
       cy.server();
-    });
-    it("User invalid search", () => {
       cy.route({
         method: "GET",
         url: "http://localhost:3000/api/v1/artists**",
@@ -33,9 +31,11 @@ describe("user can search for artist", () => {
         }
       });
       cy.visit("/");
-      cy.get("input#search-field").type("asdasdasdasd");
-      cy.get("button#search").click();
-      cy.get("#output").should("contain", "no matches for the artist");
     });
-  });
+      it ("User invalid search", () => {
+        cy.get("input#search-field").type("asdasdasdasd");
+        cy.get("button#search").click();
+        cy.get("#output").should("contain", "no matches for the artist");
+      })
+    });
 });
