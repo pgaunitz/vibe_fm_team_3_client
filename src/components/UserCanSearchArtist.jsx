@@ -2,9 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 
 class UserCanSearchArtist extends Component {
-  state = {
-    query: ""
-  };
+  state = {};
 
   onSubmitHandler = async e => {
     try {

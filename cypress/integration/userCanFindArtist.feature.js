@@ -4,7 +4,7 @@ describe("user can search for artist", () => {
       cy.server();
       cy.route({
         method: "GET",
-        url: "http://localhost:3000/api/v1/tracks**",
+        url: "http://localhost:3000/api/v1/artists**",
         response: "fixture:artist_top_songs_data.json"
       });
       cy.visit("/");
@@ -17,17 +17,17 @@ describe("user can search for artist", () => {
     });
   });
 
-  describe("SAD PATH user can search for song", () => {
+  describe("SAD PATH user can search for artist top tracks", () => {
     beforeEach(() => {
       cy.server();
     });
     it("User invalid search", () => {
       cy.route({
         method: "GET",
-        url: "http://localhost:3000/api/v1/tracks**",
+        url: "http://localhost:3000/api/v1/artists**",
         status: "400",
         response: {
-          song_not_found: [
+          error_message: [
             "There are no matches for the artist you are trying to search for"
           ]
         }

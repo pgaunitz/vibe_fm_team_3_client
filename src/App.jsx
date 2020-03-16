@@ -3,22 +3,19 @@ import UserCanSearchSong from "./components/UserCanSearchSong";
 import UserCanSearchArtist from "./components/UserCanSearchArtist";
 
 class App extends Component {
-  state = {
-    tracks: "",
-    artists: ""
-  }
+  state = {};
   onChangeHandler = e => {
-    this.setState( { [e.track.name]: e.track.name });
+    this.setState({ [e.track.name]: e.track.name });
   };
 
   render() {
     return (
       <>
         <label> Search by track</label>
-       {<UserCanSearchSong />}
+        <UserCanSearchSong />
 
         <label> Search by artists</label>
-        {<UserCanSearchArtist />}
+        <UserCanSearchArtist />
       </>
     );
   }
