@@ -1,4 +1,4 @@
-
+[![Build Status](https://semaphoreci.com/api/v1/pierre-1/vibe_fm_team_3_client/branches/development/badge.svg)](https://semaphoreci.com/pierre-1/vibe_fm_team_3_client)
 
 ### Authors 
 [Philip Gaunitz](https://github.com/pgauntiz)  
