@@ -1,4 +1,4 @@
-[![Build Status](https://semaphoreci.com/api/v1/pierre-1/vibe_fm_team_3_client/branches/development/badge.svg)](https://semaphoreci.com/pierre-1/vibe_fm_team_3_client)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/d595d13b-e602-4c55-a9ff-03660d23b337/deploy-status)](https://app.netlify.com/sites/vibefm/deploys)[![Build Status](https://semaphoreci.com/api/v1/pierre-1/vibe_fm_team_3_client/branches/development/badge.svg)](https://semaphoreci.com/pierre-1/vibe_fm_team_3_client)
 
 ### Authors 
 [Philip Gaunitz](https://github.com/pgauntiz)  
